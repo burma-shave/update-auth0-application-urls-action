@@ -24,6 +24,6 @@ inputs:
     description: 'Allowed logout URL'
     required: true
 runs:
-  using: 'node18'
+  using: 'node16'
   main: 'index.js'
 
