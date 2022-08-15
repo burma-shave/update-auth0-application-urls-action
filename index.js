@@ -26,21 +26,26 @@ const apiParams = {
 
 managementClient
   .getClient(apiParams)
-  .then((application) => {
-    updateApplication(command, application);
-  })
+  .then((application) => updateApplication(command, application))
+  .then((updates) => managementClient.updateClient(apiParams, updates))
   .catch((err) => core.setFailed(err.message));
 
 const updateApplication = (command, application) => {
   console.log(application);
-  const callbackUrlIndex = application.callbacks.indexOf(callbackUrl);
-  const logoutUrlIndex = application.allowed_logout_urls.indexOf(logoutUrl);
+
+  const newCallbacks = application.callbacks ? [...application.callbacks] : [];
+  const newLogoutUrls = application.allowed_logout_urls
+    ? [...application.allowed_logout_urls]
+    : [];
+
+  const callbackUrlIndex = newCallbacks.indexOf(callbackUrl);
+  const logoutUrlIndex = newLogoutUrls.indexOf(logoutUrl);
 
   switch (command) {
     case ADD_CMD:
       if (callbackUrlIndex < 0) {
         console.log(`Adding ${callbackUrl} to ${application.name} callbacks`);
-        application.callbacks.push(callbackUrl);
+        newCallbacks.push(callbackUrl);
       } else {
         console.log(
           `${callbackUrl} already exists in ${application.name} callbacks. No change needed.`
@@ -48,7 +53,7 @@ const updateApplication = (command, application) => {
       }
       if (logoutUrlIndex < 0) {
         console.log(`Adding ${logoutUrl} to ${application.name} logout urls`);
-        application.allowed_logout_urls.push(logoutUrl);
+        newLogoutUrls.push(logoutUrl);
       } else {
         console.log(
           `${logoutUrl} already exists in ${application.name} logout urls. No change needed.`
@@ -58,7 +63,7 @@ const updateApplication = (command, application) => {
     case REMOVE_CMD:
       if (callbackUrlIndex < 0) {
         console.log(`Removing ${callbackUrl} to ${application.name} callbacks`);
-        application.callbacks.splice(callbackUrl, 1);
+        newCallbacks.splice(callbackUrlIndex, 1);
       } else {
         console.log(
           `${callbackUrl} already exists in ${application.name} callbacks. No change needed.`
@@ -66,7 +71,7 @@ const updateApplication = (command, application) => {
       }
       if (logoutUrlIndex < 0) {
         console.log(`Removing ${logoutUrl} to ${application.name} logout urls`);
-        application.allowed_logout_urls.splice(logoutUrl, 1);
+        newLogoutUrls.splice(logoutUrlIndex, 1);
       } else {
         console.log(
           `${logoutUrl} already exists in ${application.name} logout urls. No change needed.`
@@ -76,4 +81,9 @@ const updateApplication = (command, application) => {
     default:
       throw `value of command must be ${ADD_CMD} or ${REMOVE_CMD}`;
   }
+
+  return {
+    callbacks: newCallbacks,
+    allowed_logout_urls: newLogoutUrls,
+  };
 };

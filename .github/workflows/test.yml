@@ -6,7 +6,7 @@ jobs:
     steps:
       - name: Test action
         id: test
-        uses: burma-shave/update-auth0-application-urls-action@v0.5
+        uses: burma-shave/update-auth0-application-urls-action@v0.7
         with:
           management-client-domain: miso-legal-dev.auth0.com
           management-client-clientId: RHYQEGP0DQxQqetCWY7EX0Y5nIGJexYT
