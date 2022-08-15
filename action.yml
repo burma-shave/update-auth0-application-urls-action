@@ -23,7 +23,7 @@ inputs:
   logout-url:
     description: 'Allowed logout URL'
     required: true
-  runs:
-    using: 'node18'
-    main: 'index.js'
+runs:
+  using: 'node18'
+  main: 'index.js'
 

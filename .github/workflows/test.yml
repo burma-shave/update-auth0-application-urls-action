@@ -1,0 +1,18 @@
+on: [push]
+
+jobs:
+  hello_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test action
+        id: test
+        uses: burma-shave/update-auth0-application-urls-action@v0.1
+        with:
+          management-client-domain: miso-legal-dev.auth0.com
+          management-client-clientId: RHYQEGP0DQxQqetCWY7EX0Y5nIGJexYT
+          management-client-secret: ${{ secrets.AUTH0_PRDEPLOY_MANAGEMENT_CLIENT_SECRET }} 
+          applicaton-id: rZiysRLVq9pOfki3qNeci9piGpRGgcOf
+          command: add
+          callback-url: https://foo.com/callback
+          logout-url: https://foo.com/logout
+
