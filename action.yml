@@ -1,0 +1,29 @@
+name: 'Update Auth0 Application URIs Action'
+description: ''
+inputs:
+  management-client-domain:
+    descriptoin: 'The domain of the management client'
+    required: true
+  management-client-clientId:
+    description: 'The client id of the management client'
+    required: true
+  management-client-secret:
+    description: 'The management client secret'
+    required: true
+  applicaton-id:
+    description: 'The application we are updating'
+    required: true
+  command:
+    description: 'How to update the list, can be add or remove'
+    required: true
+    default: 'add'
+  callback-url:
+    description: 'Allowed callback URL'
+    required: true
+  logout-url:
+    description: 'Allowed logout URL'
+    required: true
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
+
