@@ -21,7 +21,7 @@ const managementClient = new ManagementClient({
 });
 
 const apiParams = {
-  client_id: core.getInput("applicaton-id"),
+  client_id: core.getInput("application-id"),
 };
 
 managementClient

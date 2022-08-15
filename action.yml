@@ -10,7 +10,7 @@ inputs:
   management-client-secret:
     description: 'The management client secret'
     required: true
-  applicaton-id:
+  application-id:
     description: 'The application we are updating'
     required: true
   command:

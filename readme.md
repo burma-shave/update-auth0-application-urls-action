@@ -25,7 +25,7 @@ The client will need the following permissions:
 
 **Required** The management client secret.
 
-## `applicaton-id`
+## `application-id`
 
 **Required** The application we are updating.
 
@@ -43,12 +43,12 @@ The client will need the following permissions:
 
 ## Example usage
 
-uses: burma-shave/update-auth0-application-urls-action@v0.1 
-with:
-  management-client-domain: your-tenant-name.auth0.com
-  management-client-clientId: RHYQEGP0DQxQ9hjdiaY7EX0Y5nIGJexYT
-  management-client-secret: ${{ secrets.AUTH0_MANAGEMENT_CLIENT_SECRET }} 
-  applicaton-id: rZVq9pOfki9djt7i9piGpRGgcOf
-  command: add
-  callback-url: https://foo.com/callback
-  logout-url: https://foo.com/logout
+    uses: burma-shave/update-auth0-application-urls-action@v0.1 
+    with:
+      management-client-domain: your-tenant-name.auth0.com
+      management-client-clientId: RHYQEGP0DQxQ9hjdiaY7EX0Y5nIGJexYT
+      management-client-secret: ${{ secrets.AUTH0_MANAGEMENT_CLIENT_SECRET }} 
+      application-id: rZVq9pOfki9djt7i9piGpRGgcOf
+      command: add
+      callback-url: https://foo.com/callback
+      logout-url: https://foo.com/logout
