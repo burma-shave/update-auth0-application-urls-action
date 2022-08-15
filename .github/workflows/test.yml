@@ -12,7 +12,7 @@ jobs:
           management-client-clientId: RHYQEGP0DQxQqetCWY7EX0Y5nIGJexYT
           management-client-secret: ${{ secrets.AUTH0_PRDEPLOY_MANAGEMENT_CLIENT_SECRET }} 
           applicaton-id: rZiysRLVq9pOfki3qNeci9piGpRGgcOf
-          command: add
+          command: remove
           callback-url: https://foo.com/callback
           logout-url: https://foo.com/logout
 
