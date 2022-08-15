@@ -54009,6 +54009,7 @@ managementClient
   .catch((err) => core.setFailed(err.message));
 
 const updateApplication = (command, application) => {
+  console.log(application);
   const callbackUrlIndex = application.callbacks.indexOf(callbackUrl);
   const logoutUrlIndex = application.allowed_logout_urls.indexOf(logoutUrl);
 
