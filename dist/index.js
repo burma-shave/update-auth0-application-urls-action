@@ -54008,6 +54008,7 @@ managementClient
   .catch((err) => core.setFailed(err.message));
 
 const updateApplication = (command, application) => {
+  console.log("before:");
   console.log(application);
 
   const newCallbacks = application.callbacks ? [...application.callbacks] : [];
@@ -54039,30 +54040,36 @@ const updateApplication = (command, application) => {
       break;
     case REMOVE_CMD:
       if (callbackUrlIndex < 0) {
+        console.log(
+          `${callbackUrl} does note exist in ${application.name} callbacks. No change needed.`
+        );
+      } else {
         console.log(`Removing ${callbackUrl} to ${application.name} callbacks`);
         newCallbacks.splice(callbackUrlIndex, 1);
-      } else {
-        console.log(
-          `${callbackUrl} already exists in ${application.name} callbacks. No change needed.`
-        );
       }
       if (logoutUrlIndex < 0) {
+        console.log(
+          `${logoutUrl} does not exist in ${application.name} logout urls. No change needed.`
+        );
+      } else {
         console.log(`Removing ${logoutUrl} to ${application.name} logout urls`);
         newLogoutUrls.splice(logoutUrlIndex, 1);
-      } else {
-        console.log(
-          `${logoutUrl} already exists in ${application.name} logout urls. No change needed.`
-        );
       }
       break;
     default:
       throw `value of command must be ${ADD_CMD} or ${REMOVE_CMD}`;
   }
 
-  return {
+
+  const updates = {
     callbacks: newCallbacks,
     allowed_logout_urls: newLogoutUrls,
   };
+
+  console.log("After:");
+  console.log({...application, updates});
+
+  return updates;
 };
 
 })();
